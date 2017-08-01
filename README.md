@@ -12,4 +12,7 @@ FLASK_APP=app.py flask run
 ```
 
 ## Test app.
+```sh
+cd app
 python run_tests.py
+```
