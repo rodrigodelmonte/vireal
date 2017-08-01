@@ -1,4 +1,4 @@
-# Code Chalenge.
+# Code Challenge.
 
 ## Run app.
 ```sh
