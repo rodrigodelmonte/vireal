@@ -26,7 +26,7 @@ class SpotipposTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_create_imovel(self):
+    def test_create_propertie(self):
 
         result = self.app.post('/properties',
                                 data=json.dumps(body),
@@ -34,14 +34,14 @@ class SpotipposTestCase(unittest.TestCase):
         self.assertEqual(result.data, '{\n  "message": "Imovel criado com sucesso! Id: 1"\n}\n')
         self.assertEqual(result.status_code, 200)
 
-    def test_create_imovel_empty_data(self):
+    def test_create_propertie_empty_data(self):
 
         result = self.app.post('/properties',
                                 content_type='application/json')
         self.assertEqual(result.data, '{\n  "message": "Cade o body !?"\n}\n')
         self.assertEqual(result.status_code, 200)
 
-    def test_find_imovel(self):
+    def test_find_propertie(self):
 
         self.app.post('/properties',
                                 data=json.dumps(body),
