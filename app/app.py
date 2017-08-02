@@ -52,9 +52,32 @@ def find_propertie(id):
                     squareMeters=record.squareMeters,
                     province=province)
 
-@app.route('/properties?ax=<ax>&ay=<ay>&bx=<bx>&by=<by>', methods=['GET'])
-def find_properties(ax, ay, bx, by):
-    pass
+@app.route('/properties', methods=['GET'])
+def find_properties():
+
+    ax = request.args.get('ax')
+    ay = request.args.get('ay')
+    bx = request.args.get('bx')
+    by = request.args.get('by')
+    records = Properties.query.filter((Properties.x <= ax) &
+                                      (Properties.y <= ay) &
+                                      (Properties.x <= bx) &
+                                      (Properties.y <= by))
+    properties = []
+    for record in records:
+        propertie = {}
+        propertie['id'] = record.id
+        propertie['x'] = record.x
+        propertie['y'] = record.y
+        propertie['title'] = record.title
+        propertie['price'] = record.price
+        propertie['description'] = record.description
+        propertie['beds'] = record.beds
+        propertie['baths'] = record.baths
+        propertie['squareMeters'] = record.squareMeters
+        propertie['province'] = discover_province(record.x, record.y)
+        properties.append(propertie)
+    return jsonify(foundProperties=records.count(), properties=properties)
 
 class Properties(db.Model):
 
