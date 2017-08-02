@@ -4,7 +4,6 @@ from schema import SchemaError
 from helper import schema, discover_province
 import os
 
-# Define the WSGI application object
 app = Flask(__name__)
 
 # Configurations
@@ -12,7 +11,6 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Define the database object which is imported
 db = SQLAlchemy(app)
 
 @app.route('/properties', methods=['POST'])
@@ -23,13 +21,13 @@ def create_imovel():
         try:
             schema.validate([request_data])
             record = Properties(request_data['x'],
-                                      request_data['y'],
-                                      request_data['title'],
-                                      request_data['price'],
-                                      request_data['description'],
-                                      request_data['beds'],
-                                      request_data['baths'],
-                                      request_data['squareMeters'])
+                                request_data['y'],
+                                request_data['title'],
+                                request_data['price'],
+                                request_data['description'],
+                                request_data['beds'],
+                                request_data['baths'],
+                                request_data['squareMeters'])
             db.session.add(record)
             db.session.commit()
             return jsonify(message='Imovel criado com sucesso! Id: %s' % record)
@@ -40,6 +38,7 @@ def create_imovel():
 
 @app.route('/properties/<id>', methods=['GET'])
 def find_propertie(id):
+
     record = Properties.query.get(id)
     province = discover_province(record.x, record.y)
     return jsonify(id=record.id,
