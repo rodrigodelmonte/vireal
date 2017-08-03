@@ -14,8 +14,8 @@ $ python run_tests.py
 
 ## Use the app.
 
-### Create a propertie:
-* Resquast example:
+### Create a property:
+* Resquest example:
 ```sh
 curl -H "Content-Type: application/json" -X POST -d '{ "title": "Imovel codigo 1, com 5 quartos e 4 banheiros", "price": 1250000, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "x": 870, "y": 867, "beds": 5, "baths": 4, "squareMeters": 134 }' http://localhost:5000/properties
 ```
@@ -27,8 +27,8 @@ curl -H "Content-Type: application/json" -X POST -d '{ "title": "Imovel codigo 1
 
 ```
 
-### To looking for a specific propertie:
-* Resquast example:
+### To looking for a specific property:
+* Resquest example:
 ```sh
 $ curl http://localhost:5000/properties/10
 ```
@@ -48,7 +48,7 @@ $ curl http://localhost:5000/properties/10
 }
 ```
 ### To looking for properties from an specific area:
-* Resquast example:
+* Resquest example:
 ```sh
 $ curl -X GET "http://localhost:5000/properties?ax=200&ay=1000&bx=300&by=1000"
 ```
