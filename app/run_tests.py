@@ -31,14 +31,14 @@ class SpotipposTestCase(unittest.TestCase):
         result = self.app.post('/properties',
                                 data=json.dumps(body),
                                 content_type='application/json')
-        self.assertEqual(result.data, '{\n  "message": "Imovel criado com sucesso! Id: 1"\n}\n')
+        self.assertEqual(result.data, '{\n  "message": "Propertie success created! Id: 1"\n}\n')
         self.assertEqual(result.status_code, 200)
 
     def test_create_propertie_empty_data(self):
 
         result = self.app.post('/properties',
                                 content_type='application/json')
-        self.assertEqual(result.data, '{\n  "message": "Cade o body !?"\n}\n')
+        self.assertEqual(result.data, '{\n  "message": "Please send a json body!?"\n}\n')
         self.assertEqual(result.status_code, 200)
 
     def test_find_propertie(self):
