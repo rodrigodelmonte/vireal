@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 @app.route('/properties', methods=['POST'])
-def create_imovel():
+def create_prepertie():
 
     if request.data:
         request_data = request.get_json(force=True)
@@ -30,27 +30,34 @@ def create_imovel():
                                 request_data['squareMeters'])
             db.session.add(record)
             db.session.commit()
-            return jsonify(message='Imovel criado com sucesso! Id: %s' % record)
+            return jsonify(message='Propertie success created! Id: %s' % record)
         except SchemaError, e:
             return jsonify(message=str(e))
     else:
-        return jsonify(message='Cade o body !?')
+        return jsonify(message='Please send a json body!?')
 
-@app.route('/properties/<id>', methods=['GET'])
+@app.route('/properties/<int:id>', methods=['GET'])
 def find_propertie(id):
 
-    record = Properties.query.get(id)
-    province = discover_province(record.x, record.y)
-    return jsonify(id=record.id,
-                    x=record.x,
-                    y=record.y,
-                    title=record.title,
-                    price=record.price,
-                    description=record.description,
-                    beds=record.beds,
-                    baths=record.baths,
-                    squareMeters=record.squareMeters,
-                    province=province)
+    try:
+        id_exists = db.session.query(Properties.id).filter_by(id=id).scalar() is not None
+        if id_exists:
+            record = Properties.query.get(id)
+            province = discover_province(record.x, record.y)
+            return jsonify(id=record.id,
+                            x=record.x,
+                            y=record.y,
+                            title=record.title,
+                            price=record.price,
+                            description=record.description,
+                            beds=record.beds,
+                            baths=record.baths,
+                            squareMeters=record.squareMeters,
+                            province=province)
+        else:
+            return jsonify(message='id not exists!')
+    except Exception, e:
+        return jsonify(message=str(e))
 
 @app.route('/properties', methods=['GET'])
 def find_properties():
