@@ -66,10 +66,10 @@ def find_properties():
     ay = request.args.get('ay')
     bx = request.args.get('bx')
     by = request.args.get('by')
-    records = Properties.query.filter((Properties.x <= ax) &
+    records = Properties.query.filter((Properties.x >= ax) &
                                       (Properties.y <= ay) &
                                       (Properties.x <= bx) &
-                                      (Properties.y <= by))
+                                      (Properties.y >= by))
     properties = []
     for record in records:
         propertie = {}
