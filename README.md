@@ -27,7 +27,7 @@ curl -H "Content-Type: application/json" -X POST -d '{ "title": "Imovel codigo 1
 
 ```
 
-### Looking for a specific propertie:
+### To looking for a specific propertie:
 * Resquast example:
 ```sh
 $ curl http://localhost:5000/properties/10
@@ -47,7 +47,7 @@ $ curl http://localhost:5000/properties/10
   "y": 225
 }
 ```
-### To looking for properies from an specific area:
+### To looking for properties from an specific area:
 * Resquast example:
 ```sh
 $ curl -X GET "http://localhost:5000/properties?ax=200&ay=1000&bx=300&by=1000"
