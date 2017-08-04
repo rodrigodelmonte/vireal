@@ -8,7 +8,8 @@ $ docker run -p 5000:5000 rodrigodelmonte/vireal
 
 ## Test app.
 ```sh
-$ cd app
+$ git clone git@github.com:rodrigodelmonte/vireal.git
+$ cd vireal/app/
 $ python run_tests.py
 ```
 
